@@ -10,15 +10,15 @@ The project simulates dummy data for both **daily** and **real-time** stock pric
 
 ---
 
-## ☁️ AWS Services Used
+## ☁️ AWS Services Used And Purpose
 
-- Amazon S3  
-- AWS Lambda  
-- Amazon Kinesis Data Streams  
-- Amazon Kinesis Firehose  
-- Amazon SQS  
-- AWS Glue Data Catalog  
-- Amazon Athena  
+- S3 --> used as the data lake to store both raw and clean data.
+- Lambda --> used for serverless data ingestion, transformation and loading.
+- Kinesis Data Streams --> transports simulated real-time stock data to Firehose.
+- Kinesis Firehose --> Buffers and delivers streaming data from Kinesis Data Streams to an S3 staging bucket for further processing.
+- SQS --> works as a middle decoupling layer between S3 and the stream-processing Lambda.
+- Glue Catalog --> serves as the metadata layer, allowing Athena to interpret and query the Parquet files stored in S3.
+- Athena --> enables SQL-based querying on the cleaned and partitioned Parquet datasets.
 
 ---
 
